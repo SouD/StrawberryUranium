@@ -1,7 +1,25 @@
+// -----------------------------------------------------------------------------
+// - StrawberryUranium, by SouD.                                               -
+// - A MyAnimeList responsive custom list style!                               -
+// -----------------------------------------------------------------------------
+
+// Project variables
 $version: "0.0.1a";
+$author: "SouD";
+$since: "2014-11-15";
+
 /**
- * StrawberryUranium v#{$version} by SouD.
+ * StrawberryUranium v#{$version} by #{$author}.
+ * A MyAnimeList responsive custom list style!
+ *
+ * @author #{$author}
+ * @version #{$version}
+ * @since #{$since}
  */
+
+// -----------------------------------------------------------------------------
+// - Global variables                                                          -
+// -----------------------------------------------------------------------------
 
 // Breakpoints
 // $xs: < 768px
@@ -14,32 +32,62 @@ $mdw: min-device-width;
 $padding-right: 15px;
 $padding-left: 15px;
 
-// Width mixin
+// -----------------------------------------------------------------------------
+// - Mixins                                                                    -
+// -----------------------------------------------------------------------------
+
 @mixin width-minus-pad($width) {
   width: $width - $padding-right - $padding-right;
 }
 
-// Default pad and margin mixin
-@mixin pad-and-mar() {
-  padding-right: $padding-right;
-  padding-left: $padding-left;
-  margin-right: auto;
-  margin-left: auto;
+@mixin padding($top: null, $right: null, $bottom: null, $left: null) {
+  @if $top not null {
+    padding-top: $top;
+  }
+  @if $right not null {
+    padding-right: $right;
+  }
+  @if $bottom not null {
+    padding-bottom: $bottom;
+  }
+  @if $left not null {
+    padding-left: $left;
+  }
 }
 
-// Control Strip, unicode mal_control_strip
+@mixin margin($top: null, $right: null, $bottom: null, $left: null) {
+  @if $top not null {
+    margin-top: $top;
+  }
+  @if $right not null {
+    margin-right: $right;
+  }
+  @if $bottom not null {
+    margin-bottom: $bottom;
+  }
+  @if $left not null {
+    margin-left: $left;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// - Control Strip                                                             -
+// -----------------------------------------------------------------------------
+
+// Unicode mal_control_strip
 // \u006D\u0061\u006C\u005F\u0063\u006F\u006E\u0074\u0072\u006F\u006C\u005F\u0073\u0074\u0072\u0069\u0070
 
-/*
- * List surround
- */
+// -----------------------------------------------------------------------------
+// - List surround                                                             -
+// -----------------------------------------------------------------------------
 
 #list_surround {
-  @include pad-and-mar();
+  @include padding(null, $padding-right, null, $padding-left);
+  @include margin(null, auto, null, auto);
 
   @media ($mdw: $sm) {
     @include width-minus-pad($sm);
-    padding-top: 60px;
+    @include padding(60px);
   }
 
   @media ($mdw: $md) {
@@ -51,14 +99,12 @@ $padding-left: 15px;
   }
 }
 
-/*
- * Copyright
- */
+// -----------------------------------------------------------------------------
+// - Copyright                                                                 -
+// -----------------------------------------------------------------------------
 
 #copyright {
-  @include pad-and-mar();
-  padding-top: 20px;
-  padding-bottom: 10px;
-  margin-top: 0 !important;
+  @include padding(20px, $padding-right, 10px, $padding-left);
+  @include margin(0 !important, auto, null, auto);
   text-align: center;
 }

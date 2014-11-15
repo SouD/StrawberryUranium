@@ -1,8 +1,10 @@
 /**
  * StrawberryUranium v0.0.1a by SouD.
- */
-/*
- * List surround
+ * A MyAnimeList responsive custom list style!
+ *
+ * @author SouD
+ * @version 0.0.1a
+ * @since 2014-11-15
  */
 #list_surround {
   padding-right: 15px;
@@ -20,17 +22,14 @@
     #list_surround {
       width: 1170px; } }
 
-/*
- * Copyright
- */
 #copyright {
+  padding-top: 20px;
   padding-right: 15px;
+  padding-bottom: 10px;
   padding-left: 15px;
+  margin-top: 0 !important;
   margin-right: auto;
   margin-left: auto;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  margin-top: 0 !important;
   text-align: center; }
 
 /*# sourceMappingURL=StrawberryUranium.css.map */
