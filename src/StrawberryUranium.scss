@@ -26,18 +26,43 @@ $since: "2014-11-15";
 $sm: 768px;
 $md: 992px;
 $lg: 1200px;
-$mdw: min-device-width;
+$mw: min-width; // Used in media queries
+
+// Viewport settings
+$viewport-default-width: min-device-width;
+$viewport-default-zoom: 1.0;
 
 // Default horizontal padding
 $padding-right: 15px;
 $padding-left: 15px;
 
+// Fonts
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif: Georgia, "Times New Roman", Times, serif;
+$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+// Control strip
+// Unicode translates to mal_control_strip
+$control-strip: "\\006D\\0061\\006C\\005F\\0063\\006F\\006E\\0074\\0072\\006F\\006C\\005F\\0073\\0074\\0072\\0069\\0070";
+$show-control-strip: true;
+
 // -----------------------------------------------------------------------------
 // - Mixins                                                                    -
 // -----------------------------------------------------------------------------
 
-@mixin width-minus-pad($width) {
-  width: $width - $padding-right - $padding-right;
+@mixin margin($top: null, $right: null, $bottom: null, $left: null) {
+  @if $top not null {
+    margin-top: $top;
+  }
+  @if $right not null {
+    margin-right: $right;
+  }
+  @if $bottom not null {
+    margin-bottom: $bottom;
+  }
+  @if $left not null {
+    margin-left: $left;
+  }
 }
 
 @mixin padding($top: null, $right: null, $bottom: null, $left: null) {
@@ -55,27 +80,50 @@ $padding-left: 15px;
   }
 }
 
-@mixin margin($top: null, $right: null, $bottom: null, $left: null) {
-  @if $top not null {
-    margin-top: $top;
+@mixin viewport($width: $viewport-default-width, $zoom: $viewport-default-zoom) {
+  @-webkit-viewport {
+    width: $width;
+    zoom: $zoom;
   }
-  @if $right not null {
-    margin-right: $right;
+  @-moz-viewport {
+    width: $width;
+    zoom: $zoom;
   }
-  @if $bottom not null {
-    margin-bottom: $bottom;
+  @-ms-viewport {
+    width: $width;
+    zoom: $zoom;
   }
-  @if $left not null {
-    margin-left: $left;
+  @-o-viewport {
+    width: $width;
+    zoom: $zoom;
+  }
+  @viewport {
+    width: $width;
+    zoom: $zoom;
   }
 }
+
+@mixin width-minus-pad($width) {
+  width: $width - $padding-right - $padding-right;
+}
+
+// -----------------------------------------------------------------------------
+// - Viewport settings                                                         -
+// -----------------------------------------------------------------------------
+
+@include viewport;
 
 // -----------------------------------------------------------------------------
 // - Control Strip                                                             -
 // -----------------------------------------------------------------------------
 
-// Unicode mal_control_strip
-// \u006D\u0061\u006C\u005F\u0063\u006F\u006E\u0074\u0072\u006F\u006C\u005F\u0073\u0074\u0072\u0069\u0070
+@if $show-control-strip {
+  // TODO: Style this?
+} @else {
+  ##{$control-strip} {
+    display: none;
+  }
+}
 
 // -----------------------------------------------------------------------------
 // - List surround                                                             -
@@ -85,16 +133,16 @@ $padding-left: 15px;
   @include padding(null, $padding-right, null, $padding-left);
   @include margin(null, auto, null, auto);
 
-  @media ($mdw: $sm) {
+  @media ($mw: $sm) {
     @include width-minus-pad($sm);
     @include padding(60px);
   }
 
-  @media ($mdw: $md) {
+  @media ($mw: $md) {
     @include width-minus-pad($md);
   }
 
-  @media ($mdw: $lg) {
+  @media ($mw: $lg) {
     @include width-minus-pad($lg);
   }
 }

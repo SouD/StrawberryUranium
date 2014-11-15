@@ -6,19 +6,34 @@
  * @version 0.0.1a
  * @since 2014-11-15
  */
+@-webkit-viewport {
+  width: min-device-width;
+  zoom: 1; }
+@-moz-viewport {
+  width: min-device-width;
+  zoom: 1; }
+@-ms-viewport {
+  width: min-device-width;
+  zoom: 1; }
+@-o-viewport {
+  width: min-device-width;
+  zoom: 1; }
+@viewport {
+  width: min-device-width;
+  zoom: 1; }
 #list_surround {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto; }
-  @media (min-device-width: 768px) {
+  @media (min-width: 768px) {
     #list_surround {
       width: 738px;
       padding-top: 60px; } }
-  @media (min-device-width: 992px) {
+  @media (min-width: 992px) {
     #list_surround {
       width: 962px; } }
-  @media (min-device-width: 1200px) {
+  @media (min-width: 1200px) {
     #list_surround {
       width: 1170px; } }
 
