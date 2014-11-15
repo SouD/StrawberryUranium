@@ -1,13 +1,64 @@
+$version: "0.0.1a";
 /**
- * Bootstrap breakpoints:
- *   xs: < 768px
- *   sm: 768px - 991px
- *   md: 992px - 1199px
- *   lg: > 1200px
+ * StrawberryUranium v#{$version} by SouD.
  */
+
+// Breakpoints
+// $xs: < 768px
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+$mdw: min-device-width;
+
+// Default horizontal padding
+$padding-right: 15px;
+$padding-left: 15px;
+
+// Width mixin
+@mixin width-minus-pad($width) {
+  width: $width - $padding-right - $padding-right;
+}
+
+// Default pad and margin mixin
+@mixin pad-and-mar() {
+  padding-right: $padding-right;
+  padding-left: $padding-left;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// Control Strip, unicode mal_control_strip
+// \u006D\u0061\u006C\u005F\u0063\u006F\u006E\u0074\u0072\u006F\u006C\u005F\u0073\u0074\u0072\u0069\u0070
 
 /*
- * Globals
+ * List surround
  */
 
-/* \006D\0061\006C\005F\0063\006F\006E\0074\0072\006F\006C\005F\0073\0074\0072\0069\0070 */
+#list_surround {
+  @include pad-and-mar();
+
+  @media ($mdw: $sm) {
+    @include width-minus-pad($sm);
+    padding-top: 60px;
+  }
+
+  @media ($mdw: $md) {
+    @include width-minus-pad($md);
+  }
+
+  @media ($mdw: $lg) {
+    @include width-minus-pad($lg);
+  }
+}
+
+/*
+ * Copyright
+ */
+
+#copyright {
+  @include pad-and-mar();
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-top: 0 !important;
+  text-align: center;
+}

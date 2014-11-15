@@ -1,0 +1,36 @@
+/**
+ * StrawberryUranium v0.0.1a by SouD.
+ */
+/*
+ * List surround
+ */
+#list_surround {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto; }
+  @media (min-device-width: 768px) {
+    #list_surround {
+      width: 738px;
+      padding-top: 60px; } }
+  @media (min-device-width: 992px) {
+    #list_surround {
+      width: 962px; } }
+  @media (min-device-width: 1200px) {
+    #list_surround {
+      width: 1170px; } }
+
+/*
+ * Copyright
+ */
+#copyright {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-top: 0 !important;
+  text-align: center; }
+
+/*# sourceMappingURL=StrawberryUranium.css.map */
