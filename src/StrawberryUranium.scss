@@ -4,7 +4,7 @@
 // -----------------------------------------------------------------------------
 
 // Project variables
-$version: "0.0.1a";
+$version: "0.1.0";
 $author: "SouD";
 $since: "2014-11-15";
 
@@ -18,7 +18,7 @@ $since: "2014-11-15";
  */
 
 // -----------------------------------------------------------------------------
-// - Global variables                                                          -
+// - Variables                                                                 -
 // -----------------------------------------------------------------------------
 
 // Breakpoints
@@ -29,58 +29,120 @@ $lg: 1200px;
 $mw: min-width; // Used in media queries
 
 // Viewport settings
-$viewport-default-width: min-device-width;
-$viewport-default-zoom: 1.0;
+$viewport-width: min-device-width;
+$viewport-zoom: 1.0;
 
 // Default horizontal padding
 $padding-right: 15px;
 $padding-left: 15px;
 
-// Fonts
+// Common padding values
+$padding-small: 8px;
+
+// Font families
 $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-serif: Georgia, "Times New Roman", Times, serif;
 $font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family: $font-family-sans-serif;
 
-// Control strip
-// Unicode translates to mal_control_strip
-$control-strip: "\\006D\\0061\\006C\\005F\\0063\\006F\\006E\\0074\\0072\\006F\\006C\\005F\\0073\\0074\\0072\\0069\\0070";
+// Font sizes
+$font-size: 14px;
+$font-size-small: ceil($font-size * 0.85);
+$font-size-h1: floor($font-size * 2.6);
+
+// Font line heights
+$base-line-height: 1.428571429;
+$line-height: floor($font-size * $base-line-height);
+$line-height-headings: 1.1;
+
+// Font weights
+$font-weight-headings: 500;
+
+// Control strip visibility
 $show-control-strip: true;
+
+// Table effects
+$table-striped: true;
+$table-hover: true;
+$table-bordered: true;
+$table-border-width: 1px;
+$table-border-style: solid;
+
+// -----------------------------------------------------------------------------
+// - Colors                                                                    -
+// -----------------------------------------------------------------------------
+
+// Font
+$font-color: #333;
+
+// Link
+$link-color: #337ab7;
+$link-hover-color: #23527c;
+
+// Table
+$table-accent-color: #f9f9f9;
+$table-hover-color: #f5f5f5;
+$table-border-color: #ddd;
+
+// -----------------------------------------------------------------------------
+// - Effects                                                                   -
+// -----------------------------------------------------------------------------
+
+$control-strip-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
 
 // -----------------------------------------------------------------------------
 // - Mixins                                                                    -
 // -----------------------------------------------------------------------------
 
-@mixin margin($top: null, $right: null, $bottom: null, $left: null) {
-  @if $top not null {
+@mixin border($facing: false, $width: 1px, $style: solid, $color: #ddd) {
+  @if $facing != false {
+    border-#{$facing}-width: $width;
+    border-#{$facing}-style: $style;
+    border-#{$facing}-color: $color;
+  } @else {
+    border-width: $width;
+    border-style: $style;
+    border-color: $color;
+  }
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+     -moz-box-shadow: $shadows;
+          box-shadow: $shadows;
+}
+
+@mixin margin($top: false, $right: false, $bottom: false, $left: false) {
+  @if $top != false {
     margin-top: $top;
   }
-  @if $right not null {
+  @if $right != false {
     margin-right: $right;
   }
-  @if $bottom not null {
+  @if $bottom != false {
     margin-bottom: $bottom;
   }
-  @if $left not null {
+  @if $left != false {
     margin-left: $left;
   }
 }
 
-@mixin padding($top: null, $right: null, $bottom: null, $left: null) {
-  @if $top not null {
+@mixin padding($top: false, $right: false, $bottom: false, $left: false) {
+  @if $top != false {
     padding-top: $top;
   }
-  @if $right not null {
+  @if $right != false {
     padding-right: $right;
   }
-  @if $bottom not null {
+  @if $bottom != false {
     padding-bottom: $bottom;
   }
-  @if $left not null {
+  @if $left != false {
     padding-left: $left;
   }
 }
 
-@mixin viewport($width: $viewport-default-width, $zoom: $viewport-default-zoom) {
+@mixin viewport($width: min-device-width, $zoom: 1.0) {
   @-webkit-viewport {
     width: $width;
     zoom: $zoom;
@@ -103,25 +165,119 @@ $show-control-strip: true;
   }
 }
 
-@mixin width-minus-pad($width) {
-  width: $width - $padding-right - $padding-right;
-}
-
 // -----------------------------------------------------------------------------
 // - Viewport settings                                                         -
 // -----------------------------------------------------------------------------
 
-@include viewport;
+@include viewport($viewport-width, $viewport-zoom);
+
+// -----------------------------------------------------------------------------
+// - Globals                                                                   -
+// -----------------------------------------------------------------------------
+
+p,
+span,
+strong {
+  font: {
+    family: $font-family;
+    size: $font-size;
+  }
+  line-height: $line-height;
+  color: $font-color;
+}
+
+h1 {
+  @extend p;
+
+  @include margin(20px, false, 10px);
+
+  font: {
+    size: $font-size-h1;
+    weight: $font-weight-headings;
+  }
+  line-height: $line-height-headings;
+}
+
+small {
+  @extend p;
+
+  font-size: $font-size-small;
+}
+
+a {
+  @extend p;
+
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+
+  span,
+  small,
+  strong {
+    color: inherit;
+    text-decoration: inherit;
+  }
+}
 
 // -----------------------------------------------------------------------------
 // - Control Strip                                                             -
 // -----------------------------------------------------------------------------
 
-@if $show-control-strip {
-  // TODO: Style this?
-} @else {
-  ##{$control-strip} {
+// MAL strips certain selectors from the custom css, so we use a backslash
+// in the name to work around it
+#mal\_control_strip {
+  background: none !important;
+  @include box-shadow($control-strip-shadow);
+
+  @if not $show-control-strip {
     display: none;
+  }
+
+  // Need to override previous styles with !important
+  // cause' of MAL's style takes precedence over
+  // the custom styling in this case.
+  a {
+    @extend a;
+    color: $link-color !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: $link-hover-color !important;
+      text-decoration: underline !important;
+    }
+  }
+}
+
+#mal_cs_listinfo {
+  border: none !important;
+}
+
+#mal_cs_links {
+  border: none !important;
+}
+
+#mal_cs_powered {
+  position: inherit !important;
+  top: 0 !important;
+  right: 0 !important;
+  vertical-align: inherit !important;
+
+  text-align: inherit !important;
+
+  a {
+    img {
+      display: none;
+    }
+  }
+
+  #search {
+    #searchListButton {
+      display: none;
+    }
   }
 }
 
@@ -134,17 +290,118 @@ $show-control-strip: true;
   @include margin(null, auto, null, auto);
 
   @media ($mw: $sm) {
-    @include width-minus-pad($sm);
+    width: 750px;
     @include padding(60px);
   }
 
   @media ($mw: $md) {
-    @include width-minus-pad($md);
+    width: 970px;
   }
 
   @media ($mw: $lg) {
-    @include width-minus-pad($lg);
+    width: 1170px;
   }
+}
+
+// -----------------------------------------------------------------------------
+// - Table                                                                     -
+// -----------------------------------------------------------------------------
+
+// Table arg lists
+$table-border: $table-border-width, $table-border-style, $table-border-color;
+$table-padding: $padding-small, $padding-small, $padding-small, $padding-small;
+
+.header_title {
+  @include padding($table-padding...);
+  @include margin(20px, false, 10px);
+
+  text-align: center;
+
+  span {
+    @extend h1;
+  }
+}
+
+.table_header {
+  @include padding($table-padding...);
+
+  @if $table-bordered {
+    @include border(top, $table-border...);
+    @include border(bottom, $table-border...);
+
+    &:first-child {
+      @include border(left, $table-border...);
+    }
+
+    &:last-child {
+      @include border(right, $table-border...);
+    }
+  }
+}
+
+td.td1 {
+  @extend p;
+
+  @include padding($table-padding...);
+
+  @if $table-bordered {
+    &:first-child {
+      @include border(left, $table-border...);
+    }
+
+    &:last-child {
+      @include border(right, $table-border...);
+    }
+  }
+}
+
+td.td2 {
+  @extend p;
+
+  @include padding($table-padding...);
+
+  @if $table-striped {
+    background-color: $table-accent-color;
+  }
+
+  @if $table-bordered {
+    &:first-child {
+      @include border(left, $table-border...);
+    }
+
+    &:last-child {
+      @include border(right, $table-border...);
+    }
+  }
+}
+
+.category_totals {
+  @extend p;
+
+  @include padding($table-padding...);
+
+  @if $table-bordered {
+    @include border(false, $table-border...);
+  }
+}
+
+@if $table-hover {
+  t\r:hover {
+    .td1,
+    .td2 {
+      background-color: $table-hover-color;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// - Totals                                                                    -
+// -----------------------------------------------------------------------------
+
+#grand_totals {
+  @extend p;
+
+  @include padding($table-padding...);
 }
 
 // -----------------------------------------------------------------------------
@@ -154,5 +411,7 @@ $show-control-strip: true;
 #copyright {
   @include padding(20px, $padding-right, 10px, $padding-left);
   @include margin(0 !important, auto, null, auto);
+
+  @extend p;
   text-align: center;
 }

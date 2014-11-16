@@ -1,9 +1,9 @@
 /**
- * StrawberryUranium v0.0.1a by SouD.
+ * StrawberryUranium v0.1.0 by SouD.
  * A MyAnimeList responsive custom list style!
  *
  * @author SouD
- * @version 0.0.1a
+ * @version 0.1.0
  * @since 2014-11-15
  */
 @-webkit-viewport {
@@ -21,6 +21,67 @@
 @viewport {
   width: min-device-width;
   zoom: 1; }
+p, h1, .header_title span, small, a, #mal\_control_strip a, td.td1, td.td2, .category_totals, #grand_totals, #copyright,
+span,
+strong {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333; }
+
+h1, .header_title span {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.1; }
+
+small {
+  font-size: 12px; }
+
+a, #mal\_control_strip a {
+  color: #337ab7;
+  text-decoration: none; }
+  a:hover, #mal\_control_strip a:hover {
+    color: #23527c;
+    text-decoration: underline; }
+  a span, #mal\_control_strip a span,
+  a small,
+  #mal\_control_strip a small,
+  a strong,
+  #mal\_control_strip a strong {
+    color: inherit;
+    text-decoration: inherit; }
+
+#mal\_control_strip {
+  background: none !important;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+  #mal\_control_strip a {
+    color: #337ab7 !important;
+    text-decoration: none !important; }
+    #mal\_control_strip a:hover {
+      color: #23527c !important;
+      text-decoration: underline !important; }
+
+#mal_cs_listinfo {
+  border: none !important; }
+
+#mal_cs_links {
+  border: none !important; }
+
+#mal_cs_powered {
+  position: inherit !important;
+  top: 0 !important;
+  right: 0 !important;
+  vertical-align: inherit !important;
+  text-align: inherit !important; }
+  #mal_cs_powered a img {
+    display: none; }
+  #mal_cs_powered #search #searchListButton {
+    display: none; }
+
 #list_surround {
   padding-right: 15px;
   padding-left: 15px;
@@ -28,14 +89,91 @@
   margin-left: auto; }
   @media (min-width: 768px) {
     #list_surround {
-      width: 738px;
+      width: 750px;
       padding-top: 60px; } }
   @media (min-width: 992px) {
     #list_surround {
-      width: 962px; } }
+      width: 970px; } }
   @media (min-width: 1200px) {
     #list_surround {
       width: 1170px; } }
+
+.header_title {
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center; }
+
+.table_header {
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #ddd;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #ddd; }
+  .table_header:first-child {
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #ddd; }
+  .table_header:last-child {
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #ddd; }
+
+td.td1 {
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px; }
+  td.td1:first-child {
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #ddd; }
+  td.td1:last-child {
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #ddd; }
+
+td.td2 {
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  background-color: #f9f9f9; }
+  td.td2:first-child {
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #ddd; }
+  td.td2:last-child {
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #ddd; }
+
+.category_totals {
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ddd; }
+
+t\r:hover .td1,
+t\r:hover .td2 {
+  background-color: #f5f5f5; }
+
+#grand_totals {
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px; }
 
 #copyright {
   padding-top: 20px;
