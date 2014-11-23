@@ -29,7 +29,7 @@ $lg: 1200px;
 $mw: min-width; // Used in media queries
 
 // Viewport settings
-$viewport-width: min-device-width;
+$viewport-width: device-width;
 $viewport-zoom: 1.0;
 
 // Default horizontal padding
@@ -89,6 +89,9 @@ $table-border-color: #ddd;
 // -----------------------------------------------------------------------------
 
 $control-strip-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+$input-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+$input-focus-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+$input-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s,box-shadow ease-in-out .15s;
 
 // -----------------------------------------------------------------------------
 // - Mixins                                                                    -
@@ -104,6 +107,13 @@ $control-strip-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
     border-style: $style;
     border-color: $color;
   }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
 }
 
 @mixin box-shadow($shadows...) {
@@ -142,26 +152,32 @@ $control-strip-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
   }
 }
 
+@mixin transition($transitions...) {
+  -webkit-transition: $transitions;
+       -o-transition: $transitions;
+          transition: $transitions;
+}
+
 @mixin viewport($width: min-device-width, $zoom: 1.0) {
   @-webkit-viewport {
-    width: $width;
-    zoom: $zoom;
+    width: $width !important;
+    zoom: $zoom !important;
   }
   @-moz-viewport {
-    width: $width;
-    zoom: $zoom;
+    width: $width !important;
+    zoom: $zoom !important;
   }
   @-ms-viewport {
-    width: $width;
-    zoom: $zoom;
+    width: $width !important;
+    zoom: $zoom !important;
   }
   @-o-viewport {
-    width: $width;
-    zoom: $zoom;
+    width: $width !important;
+    zoom: $zoom !important;
   }
   @viewport {
-    width: $width;
-    zoom: $zoom;
+    width: $width !important;
+    zoom: $zoom !important;
   }
 }
 
@@ -275,6 +291,34 @@ a {
   }
 
   #search {
+    @include padding(0, 11px, 0, 0);
+    @include margin(0, 0, 0, 0);
+
+    #searchBox {
+      @include padding(6px, 12px, 6px, 12px);
+      @include border(false, 1px, solid, #ccc);
+      display: block;
+      width: 100% !important;
+      height: 34px;
+      box-sizing: border-box;
+
+      font-size: $font-size !important;
+      line-height: $line-height;
+
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      @include border-radius(4px);
+      @include box-shadow($input-shadow);
+      @include transition($input-transition);
+
+      &:focus {
+        border-color: #66afe9;
+        outline: 0;
+        @include box-shadow($input-focus-shadow);
+      }
+    }
+
     #searchListButton {
       display: none;
     }
@@ -286,8 +330,8 @@ a {
 // -----------------------------------------------------------------------------
 
 #list_surround {
-  @include padding(null, $padding-right, null, $padding-left);
-  @include margin(null, auto, null, auto);
+  @include padding(false, $padding-right, false, $padding-left);
+  @include margin(false, auto, false, auto);
 
   @media ($mw: $sm) {
     width: 750px;
@@ -395,6 +439,17 @@ td.td2 {
 }
 
 // -----------------------------------------------------------------------------
+// - More foldout                                                              -
+// -----------------------------------------------------------------------------
+
+div[id^=more] {
+  .td1,
+  .td2 {
+    @include padding(false, false, false, 54px);
+  }
+}
+
+// -----------------------------------------------------------------------------
 // - Totals                                                                    -
 // -----------------------------------------------------------------------------
 
@@ -410,7 +465,7 @@ td.td2 {
 
 #copyright {
   @include padding(20px, $padding-right, 10px, $padding-left);
-  @include margin(0 !important, auto, null, auto);
+  @include margin(0 !important, auto, false, auto);
 
   @extend p;
   text-align: center;
